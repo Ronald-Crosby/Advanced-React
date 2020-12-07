@@ -8,7 +8,9 @@
     "test": "jest",
     "deploy": "prisma deploy --env-file variables.env",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "publish-please": "publish-please",
+    "prepublishOnly": "publish-please guard"
   },
   "dependencies": {
     "babel-preset-env": "^1.7.0",
@@ -22,7 +24,6 @@
     "nodemailer": "^4.6.8",
     "nodemon": "^1.18.7",
     "npm-run-all": "^4.1.5",
-    "prisma": "^1.34.10",
     "prisma-binding": "^2.3.16",
     "stripe": "^6.12.1"
   },
@@ -47,6 +48,7 @@
     "eslint-plugin-prettier": "^3.2.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "publish-please": "^5.5.2"
   }
 }
