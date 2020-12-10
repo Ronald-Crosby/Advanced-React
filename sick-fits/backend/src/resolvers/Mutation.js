@@ -13,6 +13,24 @@ const Mutation = {
     );
     return item;
   },
+
+  updateItem(parent, args, ctx, info) {
+    // first take a copy of the updates
+    const updates = { ...args };
+    // remove id from updates
+    delete updates.id;
+    // run the update method
+    return ctx.db.mutation.updateItem(
+      {
+        data: updates,
+        where: {
+          // we need to reference the id but weve deleted updated.id. this is why we spread the args values into a new object and assign it to updates above.
+          id: args.id,
+        },
+      },
+      info
+    );
+  },
 };
 
 module.exports = Mutation;
