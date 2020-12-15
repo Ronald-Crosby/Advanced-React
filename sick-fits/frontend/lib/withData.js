@@ -13,7 +13,6 @@ function createClient({ headers }) {
         headers,
       });
     },
-    connectToDevTools: true,
   });
 }
 
