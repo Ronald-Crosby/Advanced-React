@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/olly-robinson-1f3e6d/sick-fits/dev
-# timestamp: Thu Dec 17 2020 10:41:39 GMT+0000 (Greenwich Mean Time)
+# timestamp: Sat Dec 19 2020 16:17:32 GMT+0000 (Greenwich Mean Time)
 
 type AggregateItem {
   count: Int!
@@ -862,4 +862,5 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
 }

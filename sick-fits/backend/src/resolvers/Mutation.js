@@ -75,6 +75,29 @@ const Mutation = {
     // return user to the browser
     return user;
   },
+
+  async signin(parent, args, ctx, info) {
+    // 1, check if there is a user associated with args.email
+    const user = await ctx.db.query.user({ where: { email: args.email } });
+    if (!user) {
+      throw new Error(`No user found for ${args.email}`);
+    }
+    // 2. check if the password is correct. use the bcrypt.compare() method to check if the password in the args (that comes from the signup form) and the password in the database are the same.
+    const valid = await bcrypt.compare(args.password, user.password);
+    if (!valid) {
+      throw new Error(`Invalid password`);
+    }
+    // 3. generate the JWT token
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    // 4. set the token in a cookie on the browser
+    ctx.response.cookie('token', token, {
+      // this is for security reasons
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 365, // one year max age
+    });
+    // 5. return the User
+    return user;
+  },
 };
 
 module.exports = Mutation;
