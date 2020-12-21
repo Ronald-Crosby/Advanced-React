@@ -28,6 +28,14 @@ type Mutation {
   signin(email: String!, password: String!): User!
 
   signout: SuccessMessage
+
+  requestreset(email: String!): SuccessMessage
+
+  resetPassword(
+    resetToken: String!
+    password: String!
+    confirmPassword: String!
+  ): User!
 }
 
 type Query {
@@ -40,4 +48,13 @@ type Query {
   item(where: ItemWhereUniqueInput!): Item
   itemsConnection(where: ItemWhereInput): ItemConnection!
   currentUser: User
+}
+
+type User implements Node {
+  id: ID!
+  updatedAt: DateTime!
+  createdAt: DateTime!
+  name: String!
+  email: String!
+  permissions: [Permission!]!
 }
