@@ -18,9 +18,9 @@ const Mutation = {
           // we can attached the currently logged in user to the new item by setting the id inside the 'connect' object to be the id of the user in the ctx.request
           user: {
             connect: {
-              id: ctx.request.userId
-            }
-          }
+              id: ctx.request.userId,
+            },
+          },
           ...args,
         },
       },
