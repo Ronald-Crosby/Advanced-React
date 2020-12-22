@@ -6,12 +6,21 @@ const { transport, makeANiceEmail } = require('../mail');
 
 const Mutation = {
   async createItem(parent, args, ctx, info) {
-    // TODO: check if theyre logged in
+    // Check if theyre logged in, incase they end up on the sell page somehow
+    if (!ctx.request.userId) {
+      throw new Error('You must be logged in to do that.');
+    }
 
     // this is how we access the db that we added to context earlier in the createServer file
     const item = await ctx.db.mutation.createItem(
       {
         data: {
+          // we can attached the currently logged in user to the new item by setting the id inside the 'connect' object to be the id of the user in the ctx.request
+          user: {
+            connect: {
+              id: ctx.request.userId
+            }
+          }
           ...args,
         },
       },
